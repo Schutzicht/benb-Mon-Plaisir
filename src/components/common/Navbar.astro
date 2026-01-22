@@ -63,7 +63,7 @@ const currentNav = navItems[lang] || navItems.nl;
         <button 
           id="mobile-menu-btn"
           type="button" 
-          class="text-sea-blue hover:text-sky-700 p-2 focus:outline-none" 
+          class="text-sea-blue hover:text-sky-700 p-4 focus:outline-none cursor-pointer" 
           aria-label="Menu"
         >
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,7 +85,7 @@ const currentNav = navItems[lang] || navItems.nl;
        <button 
         id="close-menu-btn"
         type="button" 
-        class="text-sea-blue hover:text-sky-700 p-2 focus:outline-none"
+        class="text-sea-blue hover:text-sky-700 p-4 focus:outline-none cursor-pointer"
       >
         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -114,27 +114,34 @@ const currentNav = navItems[lang] || navItems.nl;
 </div>
 
 <script>
-  const menuBtn = document.getElementById('mobile-menu-btn');
-  const closeBtn = document.getElementById('close-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuLinks = mobileMenu?.querySelectorAll('a');
+  function setupMobileMenu() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuLinks = mobileMenu?.querySelectorAll('a');
 
-  function toggleMenu() {
-    mobileMenu?.classList.toggle('translate-x-full');
-    document.body.classList.toggle('overflow-hidden');
+    function toggleMenu() {
+      mobileMenu?.classList.toggle('translate-x-full');
+      document.body.classList.toggle('overflow-hidden');
+    }
+
+    // Clean up old listeners if they exist (though DOM replacement usually handles this)
+    // We just add new ones to the fresh DOM elements
+    menuBtn?.addEventListener('click', toggleMenu);
+    closeBtn?.addEventListener('click', toggleMenu);
+
+    // Close menu when a link is clicked
+    menuLinks?.forEach(link => {
+      link.addEventListener('click', () => {
+          if (!mobileMenu?.classList.contains('translate-x-full')) {
+              toggleMenu();
+          }
+      });
+    });
   }
 
-  menuBtn?.addEventListener('click', toggleMenu);
-  closeBtn?.addEventListener('click', toggleMenu);
-
-  // Close menu when a link is clicked
-  menuLinks?.forEach(link => {
-    link.addEventListener('click', () => {
-        if (!mobileMenu?.classList.contains('translate-x-full')) {
-            toggleMenu();
-        }
-    });
-  });
+  // Run on initial load and after view transitions
+  document.addEventListener('astro:page-load', setupMobileMenu);
 </script>
 
 <div class="h-20"></div> <!-- Spacer -->
