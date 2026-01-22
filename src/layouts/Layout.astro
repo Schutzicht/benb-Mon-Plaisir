@@ -37,7 +37,7 @@ const lang = getLangFromUrl(Astro.url);
 		</main>
 		<Footer lang={lang} />
 		<!-- Sticky 'Book Now' Button (Mobile Only) -->
-		<div class="fixed bottom-6 right-6 md:hidden z-50">
+		<div id="mobile-book-btn" class="fixed bottom-6 right-6 md:hidden z-50 opacity-0 translate-y-10 pointer-events-none transition-all duration-500">
 			<a href={`/${lang}/contact`} class="block bg-sea-blue hover:bg-sky-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 shadow-xl transform hover:scale-105">
 				{lang === 'nl' ? 'Nu Boeken' : (lang === 'de' ? 'Jetzt Buchen' : 'Book Now')}
 			</a>
@@ -66,6 +66,25 @@ const lang = getLangFromUrl(Astro.url);
 
             // Make lenis available globally for other components if needed
             window.lenis = lenis;
+
+            // Scroll trigger for mobile floating button
+            function setupFloatingButton() {
+                const btn = document.getElementById('mobile-book-btn');
+                
+                const handleScroll = () => {
+                    if (window.scrollY > 300) {
+                        btn?.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                    } else {
+                        btn?.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                    }
+                };
+
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                // Check initial state
+                handleScroll();
+            }
+
+            document.addEventListener('astro:page-load', setupFloatingButton);
         </script>
 	</body>
 </html>
