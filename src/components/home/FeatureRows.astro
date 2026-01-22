@@ -1,0 +1,106 @@
+---
+import ScrollReveal from '../ui/ScrollReveal.astro';
+import ParallaxImage from '../ui/ParallaxImage.astro';
+
+const { lang } = Astro.props;
+
+const content = {
+  nl: {
+    features: [
+      {
+        title: "Veerse Meer & Omgeving",
+        desc: "Het Veerse meer is binnen enkele minuten te bereiken. Perfect voor watersporten zoals kanoën, surfen, zeilen en suppen, of een prachtige wandeling langs de oever.",
+        img: "/images/omgeving/veerse-meer-generated.png",
+        stat: "Watersport"
+      },
+      {
+        title: "Ambachtelijk Ontbijt",
+        desc: "Elke ochtend serveren wij een uitgebreid ontbijt met verse streekproducten. Geniet van lokale lekkernijen en begin uw dag in Zeeland op de best mogelijke manier.",
+        img: "/images/mon-plaisir/breakfast_luxury.png",
+        stat: "Vers & Lokaal"
+      }
+    ]
+  },
+  en: {
+    features: [
+      {
+        title: "Veerse Meer & Surroundings",
+        desc: "The Veerse Meer can be reached within a few minutes. Perfect for water sports such as canoeing, surfing, sailing and paddle boarding, or a beautiful walk along the shore.",
+        img: "/images/omgeving/veerse-meer-generated.png",
+        stat: "Water Sports"
+      },
+      {
+        title: "Artisan Breakfast",
+        desc: "Every morning we serve a generous breakfast with fresh local products. Enjoy local delicacies and start your day in Zeeland the best way possible.",
+        img: "/images/mon-plaisir/breakfast_luxury.png",
+        stat: "Fresh & Local"
+      }
+    ]
+  },
+  de: {
+    features: [
+      {
+        title: "Veerse Meer & Umgebung",
+        desc: "Das Veerse Meer ist in wenigen Minuten zu erreichen. Perfekt für Wassersportarten wie Kanufahren, Surfen, Segeln und SUP, oder ein schöner Spaziergang am Ufer.",
+        img: "/images/omgeving/veerse-meer-generated.png",
+        stat: "Wassersport"
+      },
+      {
+        title: "Handwerkliches Frühstück",
+        desc: "Jeden Morgen servieren wij een reichhaltiges Frühstück mit frischen regionalen Produkten. Genießen Sie lokale Köstlichkeiten und beginnen Sie Ihren Tag in Zeeland auf die bestmögliche Weise.",
+        img: "/images/mon-plaisir/breakfast_luxury.png",
+        stat: "Frisch & Lokal"
+      }
+    ]
+  }
+};
+
+const t = content[lang] || content.nl;
+---
+
+<section class="py-24 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    {t.features.map((feature, index) => (
+      <div class={`flex flex-col md:flex-row items-center gap-12 md:gap-24 mb-32 last:mb-0 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+        
+        <!-- Image Side -->
+        <div class="w-full md:w-1/2 relative group">
+           <ScrollReveal animation={index % 2 === 0 ? 'slide-left' : 'slide-right'} duration={1.2}>
+               <div class="relative overflow-hidden rounded-sm aspect-[4/3] md:aspect-[3/4] lg:aspect-[4/3]">
+                  <ParallaxImage 
+                    src={feature.img} 
+                    alt={feature.title} 
+                    class="h-full w-full object-cover"
+                  />
+                  <!-- Stat Badge overlay -->
+                  <div class="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-2 text-sea-blue font-heading font-bold shadow-lg z-10 border border-white/20">
+                    {feature.stat}
+                  </div>
+               </div>
+           </ScrollReveal>
+        </div>
+
+        <!-- Text Side -->
+        <div class="w-full md:w-1/2">
+           <ScrollReveal animation="fade-up" delay={0.3}>
+               <div class="w-16 h-[2px] bg-dune-sand mb-6"></div>
+               <h3 class="text-3xl md:text-5xl font-heading font-light text-slate-900 mb-6 leading-tight">
+                 {feature.title}
+               </h3>
+               <p class="text-lg text-slate-600 font-light leading-relaxed mb-8 max-w-lg">
+                 {feature.desc}
+               </p>
+               <div class="flex items-center text-sm font-bold uppercase tracking-widest text-sea-blue group cursor-pointer">
+                  <span class="border-b border-sea-blue pb-1">
+                      {lang === 'nl' ? 'Ontdek meer' : lang === 'de' ? 'Mehr entdecken' : 'Discover more'}
+                  </span>
+               </div>
+           </ScrollReveal>
+        </div>
+
+      </div>
+    ))}
+
+  </div>
+</section>

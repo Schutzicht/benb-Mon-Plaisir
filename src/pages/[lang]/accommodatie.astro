@@ -1,0 +1,227 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ScrollReveal from '../../components/ui/ScrollReveal.astro';
+import ParallaxImage from '../../components/ui/ParallaxImage.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'nl' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'de' } },
+  ];
+}
+
+const { lang } = Astro.params;
+
+const content = {
+  nl: {
+    title: "Accommodatie",
+    headline: "Luxe Overnachten in Wolphaartsdijk",
+    intro: "Stap binnen in de wereld van B&B Mon Plaisir. Onze suites, 'Suite D’amour' en 'Suite Mon Plaisir', bieden een unieke combinatie van luxe, comfort en rust.",
+    sections: [
+      {
+        title: "Suite D’amour",
+        desc: "Een romantische suite van 20 m² op de begane grond. Geniet van uw privéterras, eigen badkamer en het uitzicht. Inclusief gratis WiFi en ontbijt.",
+        amenities: ["Privé badkamer", "Privéterras", "Begane grond", "Ontbijt inbegrepen"],
+        img: "/images/mon-plaisir/gallery_01.webp"
+      },
+      {
+        title: "Suite Mon Plaisir",
+        desc: "Onze naamgever: een prachtige suite van 20 m² met uitzicht op de tuin. Beschikt over een eigen entree, luxe badkamer en heerlijk terras.",
+        amenities: ["Uitzicht op tuin", "Eigen entree", "Privé badkamer", "Gratis WiFi"],
+        img: "/images/mon-plaisir/gallery_03.webp"
+      },
+      {
+        title: "Wellness & Ontspanning",
+        desc: "Wanneer het weer iets minder is, of gewoon voor de ontspanning, kunt u gebruik maken van onze sauna en zonnebank. Buiten vindt u een heerlijk zwembad.",
+        amenities: ["Sauna", "Zonnebank", "Zwembad", "Loungesets"],
+        img: "/images/mon-plaisir/gallery_04.webp"
+      },
+      {
+        title: "Buitenleven",
+        desc: "Het buitenleven is hier sterk aanwezig. Zonnebaad aan het zwembad, ontspan in de achtertuin of geniet van uw eigen terrasje.",
+        amenities: ["Grote tuin", "Terrassen", "Zonneweide", "Rust"],
+        img: "/images/mon-plaisir/gallery_07.webp"
+      }
+    ],
+    rules: {
+      title: "Goed om te weten",
+      items: [
+        { label: "Check-in", value: "13:00 - 22:00" },
+        { label: "Check-out", value: "07:00 - 11:00" },
+        { label: "Roken", value: "Alleen buiten" },
+        { label: "Huisdieren", value: "Niet toegestaan" }
+      ]
+    }
+  },
+  en: {
+    title: "Accommodation",
+    headline: "Luxury Stay in Wolphaartsdijk",
+    intro: "Step into the world of B&B Mon Plaisir. Our suites, 'Suite D’amour' and 'Suite Mon Plaisir', offer a unique combination of luxury, comfort, and peace.",
+    sections: [
+      {
+        title: "Suite D’amour",
+        desc: "A romantic suite of 20 m² on the ground floor. Enjoy your private terrace, private bathroom, and the view. Includes free WiFi and breakfast.",
+        amenities: ["Private bathroom", "Private terrace", "Ground floor", "Breakfast included"],
+        img: "/images/mon-plaisir/gallery_01.webp"
+      },
+      {
+        title: "Suite Mon Plaisir",
+        desc: "Our namesake: a beautiful suite of 20 m² with a view of the garden. Features a private entrance, luxury bathroom, and lovely terrace.",
+        amenities: ["Garden view", "Private entrance", "Private bathroom", "Free WiFi"],
+        img: "/images/mon-plaisir/gallery_03.webp"
+      },
+      {
+        title: "Wellness & Relaxation",
+        desc: "When the weather is less favorable, or just for relaxation, you can use our sauna and solarium. Outside you will find a lovely swimming pool.",
+        amenities: ["Sauna", "Solarium", "Swimming pool", "Lounge sets"],
+        img: "/images/mon-plaisir/gallery_04.webp"
+      },
+      {
+        title: "Outdoor Living",
+        desc: "Outdoor living is strongly present here. Sunbathe by the pool, relax in the backyard, or enjoy your own terrace.",
+        amenities: ["Large garden", "Terraces", "Sunbathing area", "Silence"],
+        img: "/images/mon-plaisir/gallery_07.webp"
+      }
+    ],
+    rules: {
+      title: "Good to know",
+      items: [
+        { label: "Check-in", value: "13:00 - 22:00" },
+        { label: "Check-out", value: "07:00 - 11:00" },
+        { label: "Smoking", value: "Outside only" },
+        { label: "Pets", value: "Not allowed" }
+      ]
+    }
+  },
+  de: {
+    title: "Unterkunft",
+    headline: "Luxuriöser Aufenthalt in Wolphaartsdijk",
+    intro: "Treten Sie ein in die Welt von B&B Mon Plaisir. Unsere Suiten, 'Suite D’amour' und 'Suite Mon Plaisir', bieten eine einzigartige Kombination aus Luxus, Komfort und Ruhe.",
+    sections: [
+      {
+        title: "Suite D’amour",
+        desc: "Eine romantische Suite von 20 m² im Erdgeschoss. Genießen Sie Ihre private Terrasse, Ihr eigenes Bad und die Aussicht. Inklusive kostenlosem WLAN und Frühstück.",
+        amenities: ["Privates Bad", "Private Terrasse", "Erdgeschoss", "Frühstück inklusive"],
+        img: "/images/mon-plaisir/gallery_01.webp"
+      },
+      {
+        title: "Suite Mon Plaisir",
+        desc: "Unser Namensgeber: eine schöne Suite von 20 m² mit Blick auf den Garten. Verfügt über einen eigenen Eingang, ein luxuriöses Bad und eine schöne Terrasse.",
+        amenities: ["Gartenblick", "Eigener Eingang", "Privates Bad", "Gratis WiFi"],
+        img: "/images/mon-plaisir/gallery_03.webp"
+      },
+      {
+        title: "Wellness & Entspannung",
+        desc: "Wenn das Wetter weniger gut ist oder einfach nur zur Entspannung, können Sie unsere Sauna und unser Solarium nutzen. Draußen finden Sie einen schönen Swimmingpool.",
+        amenities: ["Sauna", "Solarium", "Schwimmbad", "Lounge-Sets"],
+        img: "/images/mon-plaisir/gallery_04.webp"
+      },
+      {
+        title: "Leben im Freien",
+        desc: "Das Leben im Freien ist hier sehr präsent. Sonnen Sie sich am Pool, entspannen Sie im Hinterhof oder genießen Sie Ihre eigene Terrasse.",
+        amenities: ["Großer Garten", "Terrassen", "Liegewiese", "Ruhe"],
+        img: "/images/mon-plaisir/gallery_07.webp"
+      }
+    ],
+    rules: {
+      title: "Gut zu wissen",
+      items: [
+        { label: "Check-in", value: "13:00 - 22:00" },
+        { label: "Check-out", value: "07:00 - 11:00" },
+        { label: "Rauchen", value: "Nur draußen" },
+        { label: "Haustiere", value: "Nicht erlaubt" }
+      ]
+    }
+  }
+};
+
+const t = content[lang] || content.nl;
+---
+
+<Layout title={`B&B Mon Plaisir - ${t.title}`} lang={lang}>
+  
+  <!-- Minimal Header -->
+  <div class="relative bg-stone-50 py-32 text-center text-slate-800">
+      <ScrollReveal animation="fade-up">
+         <h1 class="font-heading text-5xl md:text-7xl font-light mb-8 text-sea-blue tracking-tight">{t.headline}</h1>
+         <p class="max-w-2xl mx-auto text-stone-600 text-xl font-light leading-relaxed">{t.intro}</p>
+         <div class="w-24 h-[1px] bg-sea-blue/30 mx-auto mt-12"></div>
+      </ScrollReveal>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+    
+    <div class="space-y-32">
+       {t.sections.map((section, index) => (
+         <div class={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-24`}>
+            
+            {/* Image Side */}
+            <div class="w-full lg:w-1/2 relative group">
+               <ScrollReveal animation={index % 2 === 0 ? 'slide-left' : 'slide-right'} duration={1.2}>
+                   <div class="relative overflow-hidden rounded-sm shadow-2xl aspect-[4/3]">
+                      <ParallaxImage 
+                        src={section.img} 
+                        alt={section.title} 
+                        class="h-full w-full object-cover"
+                      />
+                      <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                   </div>
+                   <!-- Decor element -->
+                   <div class={`absolute -bottom-6 ${index % 2 === 0 ? '-right-6' : '-left-6'} w-24 h-24 border-b-2 border-${index % 2 === 0 ? 'r' : 'l'}-2 border-sea-blue/20 hidden lg:block`}></div>
+               </ScrollReveal>
+            </div>
+
+            {/* Content Side */}
+            <div class="w-full lg:w-1/2">
+                <ScrollReveal animation="fade-up" delay={0.2}>
+                    <h2 class="text-4xl font-heading font-light text-sea-blue mb-6">{section.title}</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed mb-8 font-light border-l-2 border-stone-200 pl-6">
+                       {section.desc}
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        {section.amenities.map(amenity => (
+                            <div class="flex items-center text-sm font-medium text-slate-500">
+                                <span class="w-1.5 h-1.5 bg-sea-blue/40 rounded-full mr-3"></span>
+                                {amenity}
+                            </div>
+                        ))}
+                    </div>
+                </ScrollReveal>
+            </div>
+
+         </div>
+       ))}
+    </div>
+
+    <!-- Info / Rules Section -->
+    <div class="mt-40 bg-foam-white p-12 lg:p-20 rounded-sm border border-stone-100 relative overflow-hidden">
+        <ScrollReveal animation="fade-up">
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                   <h3 class="text-3xl font-heading font-light text-sea-blue mb-6">{t.rules.title}</h3>
+                   <p class="text-slate-600 mb-8">{lang === 'nl' ? 'Wij streven naar een zorgeloos verblijf voor al onze gasten. Hier zijn enkele praktische zaken om rekening mee te houden.' : 'We strive for a carefree stay for all our guests. Here are some practical matters to keep in mind.'}</p>
+                </div>
+                
+                <div class="bg-white p-8 shadow-sm">
+                   <ul class="space-y-4">
+                      {t.rules.items.map(item => (
+                          <li class="flex justify-between items-center border-b border-stone-100 pb-2 last:border-0 last:pb-0">
+                              <span class="font-bold text-slate-700">{item.label}</span>
+                              <span class="text-slate-500">{item.value}</span>
+                          </li>
+                      ))}
+                   </ul>
+                </div>
+            </div>
+            
+            <!-- Background Watermark -->
+            <div class="absolute -top-20 -right-20 text-[20rem] font-heading text-sea-blue/5 leading-none select-none pointer-events-none">
+                &
+            </div>
+        </ScrollReveal>
+    </div>
+
+  </div>
+</Layout>

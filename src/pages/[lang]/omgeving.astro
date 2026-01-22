@@ -1,0 +1,233 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ParallaxImage from '../../components/ui/ParallaxImage.astro';
+import ScrollReveal from '../../components/ui/ScrollReveal.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'nl' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'de' } },
+  ];
+}
+
+const { lang } = Astro.params;
+
+const content = {
+  nl: {
+    title: "Omgeving",
+    headline: "Ontdek Wolphaartsdijk & Zeeland",
+    description: "Gelegen aan het prachtige Veerse Meer, biedt B&B Mon Plaisir de perfecte uitvalsbasis voor watersport, cultuur en ontspanning in het Zeeuwse landschap.",
+    labels: {
+      natuur: "Natuur",
+      cultuur: "Cultuur",
+      dining: "Eten & Drinken",
+      highlights: "Highlights"
+    },
+    spotsTitle: "Hotspots",
+    spots: [
+      { 
+        title: "Het Veerse Meer", 
+        desc: "Een paradijs voor watersporters. Of u nu wilt zeilen, surfen, kanoën of gewoon heerlijk wilt zwemmen, het meer ligt op steenworp afstand.", 
+        img: "/images/mon-plaisir/gallery_02.webp" 
+      },
+      { 
+        title: "Historisch Goes", 
+        desc: "Een sfeervolle stad met een prachtige jachthaven, historische panden en een ruim aanbod aan winkels en culinaire hotspots.", 
+        img: "/images/mon-plaisir/gallery_09.webp" 
+      },
+      { 
+        title: "Molen De Hoop", 
+        desc: "De trots van Wolphaartsdijk. Deze prachtige stellingmolen uit 1808 domineert het dorpsbeeld en is zeker een bezoekje waard.", 
+        img: "/images/mon-plaisir/gallery_06.webp" 
+      },
+      { 
+        title: "Zeeuwse Stranden", 
+        desc: "Hoewel we aan het meer zitten, zijn de brede Noordzeestranden van Vrouwenpolder of Dishoek binnen 25 minuten bereikbaar.", 
+        img: "/images/mon-plaisir/hero-main.webp" 
+      }
+    ],
+    dining: [
+      { name: "Brasserie De Linde", desc: "Geniet van eerlijke gerechten en een gastvrije sfeer in het hart van het dorp.", img: "/images/mon-plaisir/gallery_05.webp" },
+      { name: "De Paardekreek", desc: "Heerlijk terras direct aan het Veerse Meer voor een lunch of diner met uitzicht.", img: "/images/mon-plaisir/gallery_04.webp" },
+      { name: "Katoen Goes", desc: "Moderne brasserie in een historisch pand in hartje Goes.", img: "/images/mon-plaisir/gallery_01.webp" },
+      { name: "Zeeuwse Mosselen", desc: "Proef de smaak van Zeeland bij de vele visrestaurants in de nabije omgeving.", img: "/images/mon-plaisir/gallery_02.webp" }
+    ],
+    sights: [
+      { name: "Stoomtrein Goes-Borsele", desc: "Maak een nostalgische rit door het Zeeuwse landschap in een echte stoomtrein.", img: "/images/mon-plaisir/gallery_08.webp" },
+      { name: "Middelburg", desc: "De hoofdstad van Zeeland met meer dan 1100 monumenten en het indrukwekkende stadhuis.", img: "/images/mon-plaisir/gallery_09.webp" },
+      { name: "Deltapark Neeltje Jans", desc: "Ontdek alles over de Deltawerken en het water bij dit unieke park aan de Oosterschelde.", img: "/images/mon-plaisir/gallery_02.webp" },
+      { name: "Berkenhof Tropical Zoo", desc: "Een verrassende tropische wereld vol dieren en natuur, vlakbij in Kwadendamme.", img: "/images/mon-plaisir/gallery_07.webp" }
+    ],
+    activities: [
+      { name: "Fietsen langs de Dammen", desc: "Ontdek de prachtige fietspaden langs het Veerse Meer en over de Zeeuwse dijken.", img: "/images/mon-plaisir/gallery_06.webp" },
+      { name: "Kanoën op het Meer", desc: "Huur een kano of SUP bij een van de vele verhuurpunten en verken de verborgen eilandjes.", img: "/images/mon-plaisir/gallery_02.webp" },
+      { name: "Wandelen in de Polders", desc: "Geniet van de rust en de weidse vergezichten tijdens een wandeling door het Zeeuwse polderlandschap.", img: "/images/mon-plaisir/gallery_09.webp" }
+    ]
+  },
+  en: {
+    title: "Surroundings",
+    headline: "Discover Wolphaartsdijk & Zeeland",
+    description: "Located on the beautiful Veerse Meer, B&B Mon Plaisir offers the perfect base for water sports, culture, and relaxation in the Zeeland landscape.",
+    labels: {
+      natuur: "Nature",
+      cultuur: "Culture",
+      dining: "Dining & Drinks",
+      highlights: "Highlights"
+    },
+    spotsTitle: "Hotspots",
+    spots: [
+      { 
+        title: "The Veerse Meer", 
+        desc: "A paradise for water sports enthusiasts. Whether you want to sail, surf, canoe, or just swim, the lake is just steps away.", 
+        img: "/images/mon-plaisir/gallery_02.webp" 
+      },
+      { 
+        title: "Historic Goes", 
+        desc: "A charming city with a beautiful marina, historic buildings, and a wide range of shops and culinary hotspots.", 
+        img: "/images/mon-plaisir/gallery_09.webp" 
+      },
+      { 
+        title: "Mill De Hoop", 
+        desc: "The pride of Wolphaartsdijk. This beautiful windmill from 1808 dominates the village and is definitely worth a visit.", 
+        img: "/images/mon-plaisir/gallery_06.webp" 
+      },
+      { 
+        title: "Zeeland Beaches", 
+        desc: "Although we are on the lake, the wide North Sea beaches of Vrouwenpolder or Dishoek are reachable within 25 minutes.", 
+        img: "/images/mon-plaisir/hero-main.webp" 
+      }
+    ],
+    dining: [
+      { name: "Brasserie De Linde", desc: "Enjoy honest dishes and a hospitable atmosphere in the heart of the village.", img: "/images/mon-plaisir/gallery_05.webp" },
+      { name: "De Paardekreek", desc: "Lovely terrace directly on the Veerse Meer for lunch or dinner with a view.", img: "/images/mon-plaisir/gallery_04.webp" },
+      { name: "Katoen Goes", desc: "Modern brasserie in a historic building in the heart of Goes.", img: "/images/mon-plaisir/gallery_01.webp" },
+      { name: "Zeeland Mussels", desc: "Taste the flavor of Zeeland at the many seafood restaurants nearby.", img: "/images/mon-plaisir/gallery_02.webp" }
+    ],
+    sights: [
+      { name: "Steam Train Goes-Borsele", desc: "Take a nostalgic ride through the Zeeland landscape in a real steam train.", img: "/images/mon-plaisir/gallery_08.webp" },
+      { name: "Middelburg", desc: "The capital of Zeeland with more than 1100 monuments and the impressive city hall.", img: "/images/mon-plaisir/gallery_09.webp" },
+      { name: "Deltapark Neeltje Jans", desc: "Discover everything about the Delta Works and the water at this unique park.", img: "/images/mon-plaisir/gallery_02.webp" },
+      { name: "Berkenhof Tropical Zoo", desc: "A surprising tropical world full of animals and nature, nearby in Kwadendamme.", img: "/images/mon-plaisir/gallery_07.webp" }
+    ],
+    activities: [
+      { name: "Cycling along the Dams", desc: "Discover the beautiful cycling paths along the Veerse Meer and over the Zeeland dikes.", img: "/images/mon-plaisir/gallery_06.webp" },
+      { name: "Canoeing on the Lake", desc: "Rent a canoe or SUP and explore the hidden islands of the Veerse Meer.", img: "/images/mon-plaisir/gallery_02.webp" },
+      { name: "Walking in the Polders", desc: "Enjoy the peace and the wide vistas during a walk through the landscape.", img: "/images/mon-plaisir/gallery_09.webp" }
+    ]
+  },
+  de: {
+    title: "Umgebung",
+    headline: "Entdecken Sie Wolphaartsdijk & Zeeland",
+    description: "Am wunderschönen Veerse Meer gelegen, bietet das B&B Mon Plaisir den perfekten Ausgangspunkt für Wassersport, Kultur und Entspannung in der zeeländischen Landschaft.",
+    labels: {
+      natuur: "Natur",
+      cultuur: "Kultur",
+      dining: "Essen & Trinken",
+      highlights: "Highlights"
+    },
+    spotsTitle: "Hotspots",
+    spots: [
+      { 
+        title: "Das Veerse Meer", 
+        desc: "Ein Paradies für Wassersportler. Ob Segeln, Surfen, Kanufahren oder Schwimmen, der See ist nur wenige Schritte entfernt.", 
+        img: "/images/mon-plaisir/gallery_02.webp" 
+      },
+      { 
+        title: "Historisches Goes", 
+        desc: "Eine stimmungsvolle Stadt mit einem schönen Jachthafen, historischen Gebäuden und kulinarischen Hotspots.", 
+        img: "/images/mon-plaisir/gallery_09.webp" 
+      },
+      { 
+        title: "Mühle De Hoop", 
+        desc: "Der Stolz von Wolphaartsdijk. Diese wunderschöne Mühle aus dem Jahr 1808 dominiert das Dorfbild.", 
+        img: "/images/mon-plaisir/gallery_06.webp" 
+      },
+      { 
+        title: "Zeeländische Strände", 
+        desc: "Obwohl wir am See liegen, sind die breiten Nordseestrände von Vrouwenpolder oder Dishoek in 25 Minuten erreichbar.", 
+        img: "/images/mon-plaisir/hero-main.webp" 
+      }
+    ],
+    dining: [
+      { name: "Brasserie De Linde", desc: "Genießen Sie ehrliche Gerichte in einer gastfreundlichen Atmosphäre im Herzen des Dorfes.", img: "/images/mon-plaisir/gallery_05.webp" },
+      { name: "De Paardekreek", desc: "Schöne Terrasse direkt am Veerse Meer für Mittag- oder Abendessen mit Aussicht.", img: "/images/mon-plaisir/gallery_04.webp" },
+      { name: "Katoen Goes", desc: "Moderne Brasserie in einem historischen Gebäude im Herzen von Goes.", img: "/images/mon-plaisir/gallery_01.webp" },
+      { name: "Zeeländische Muscheln", desc: "Probieren Sie den Geschmack von Zeeland in den vielen Fischrestaurants in der Nähe.", img: "/images/mon-plaisir/gallery_02.webp" }
+    ],
+    sights: [
+      { name: "Dampfzug Goes-Borsele", desc: "Machen Sie eine nostalgische Fahrt durch die zeeländische Landschaft in einem echten Dampfzug.", img: "/images/mon-plaisir/gallery_08.webp" },
+      { name: "Middelburg", desc: "Die Hauptstadt von Zeeland mit über 1100 Denkmälern und dem beeindruckenden Rathaus.", img: "/images/mon-plaisir/gallery_09.webp" },
+      { name: "Deltapark Neeltje Jans", desc: "Entdecken Sie alles über die Deltawerke und das Wasser in diesem einzigartigen Park.", img: "/images/mon-plaisir/gallery_02.webp" },
+      { name: "Berkenhof Tropical Zoo", desc: "Eine überraschende tropische Welt voller Tiere und Natur, ganz in der Nähe in Kwadendamme.", img: "/images/mon-plaisir/gallery_07.webp" }
+    ],
+    activities: [
+      { name: "Radfahren an den Dämmen", desc: "Entdecken Sie die schönen Radwege am Veerse Meer und über die zeeländischen Deiche.", img: "/images/mon-plaisir/gallery_06.webp" },
+      { name: "Kanufahren auf dem See", desc: "Mieten Sie ein Kanu oder SUP und erkunden Sie die versteckten Inseln des Veerse Meers.", img: "/images/mon-plaisir/gallery_02.webp" },
+      { name: "Wandern im Polder", desc: "Genießen Sie die Ruhe und die weiten Ausblicke bei einer Wanderung durch die Landschaft.", img: "/images/mon-plaisir/gallery_09.webp" }
+    ]
+  }
+};
+
+const t = content[lang] || content.nl;
+
+const allItems = [
+    ...t.spots.map(s => ({ ...s, category: t.labels.highlights })), 
+    ...t.dining.map(s => ({ ...s, category: t.labels.dining })),
+    ...t.sights.map(s => ({ ...s, category: t.labels.cultuur })),
+    ...t.activities.map(s => ({ ...s, category: t.labels.natuur }))
+];
+---
+
+<Layout title={`B&B Mon Plaisir - ${t.title}`} lang={lang}>
+  
+  <div class="relative bg-stone-50 py-32 text-center text-slate-800">
+      <ScrollReveal animation="fade-up">
+         <h1 class="font-heading text-5xl md:text-7xl font-light mb-8 text-sea-blue tracking-tight">{t.headline}</h1>
+         <p class="max-w-2xl mx-auto text-stone-600 text-xl font-light leading-relaxed">{t.description}</p>
+         <div class="w-24 h-[1px] bg-sea-blue/30 mx-auto mt-12"></div>
+      </ScrollReveal>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+    
+    <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+      
+      {allItems.map((item, index) => (
+        <div class="break-inside-avoid relative group mb-8">
+            <ScrollReveal animation="fade-up" delay={index % 3 * 0.1}>
+                <div class="block bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden transform group-hover:-translate-y-1">
+                    
+                    <div class={`relative overflow-hidden w-full ${index % 5 === 0 ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
+                        <ParallaxImage 
+                            src={item.img} 
+                            alt={item.name || item.title} 
+                            class="w-full h-full object-cover"
+                            height="h-[120%]"
+                        />
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                        <div class="absolute top-4 left-4 z-10">
+                            <span class="inline-block bg-white/90 backdrop-blur text-sea-blue text-xs font-bold uppercase tracking-widest px-3 py-1 shadow-sm border border-stone-100">
+                                {item.category}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-8">
+                        <h3 class="font-heading text-2xl font-light text-slate-900 mb-3 group-hover:text-sea-blue transition-colors">
+                            {item.name || item.title}
+                        </h3>
+                        <p class="text-stone-500 text-sm leading-relaxed mb-4">
+                            {item.desc}
+                        </p>
+                    </div>
+                </div>
+            </ScrollReveal>
+        </div>
+      ))}
+
+    </div>
+  </div>
+</Layout>

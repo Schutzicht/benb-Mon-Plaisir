@@ -1,0 +1,82 @@
+---
+import ScrollReveal from '../ui/ScrollReveal.astro';
+import ParallaxImage from '../ui/ParallaxImage.astro';
+import ImageSlider from '../ui/ImageSlider.astro';
+
+const { lang } = Astro.props;
+
+const content = {
+  nl: {
+    title: "Rust & Luxe",
+    desc: "De kamers zijn ruim opgesteld en voorzien van 2 persoonsbedden met een luxe privé badkamer. Het buitenleven is hier sterk aanwezig, u kunt hier heerlijk zonnebaden aan het zwembad of op uw privé terrasje.",
+    stat1: "Wellness",
+    stat1Label: "Sauna & Zwembad",
+    stat2: "Adults Only",
+    stat2Label: "Rust & Privacy"
+  },
+  en: {
+    title: "Rest & Luxury",
+    desc: "The rooms are spacious and equipped with double beds and a luxury private bathroom. Outdoor living is strongly present here; you can sunbathe by the pool or on your private terrace.",
+    stat1: "Wellness",
+    stat1Label: "Sauna & Pool",
+    stat2: "Adults Only",
+    stat2Label: "Peace & Privacy"
+  },
+  de: {
+    title: "Ruhe & Luxus",
+    desc: "Die Zimmer sind geräumig und verfügen über Doppelbetten mit luxuriösem Privatbad. Das Leben im Freien ist hier sehr präsent, Sie können am Pool oder auf Ihrer privaten Terrasse sonnenbaden.",
+    stat1: "Wellness",
+    stat1Label: "Sauna & Schwimmbad",
+    stat2: "Adults Only",
+    stat2Label: "Ruhe & Privatsphäre"
+  }
+};
+
+const t = content[lang] || content.nl;
+---
+
+<section class="py-32 px-4 bg-stone-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
+      
+      <!-- Text Column (Editorial Style) -->
+      <div class="lg:col-span-5 order-2 lg:order-1 relative">
+        <ScrollReveal animation="fade-up" duration={1}>
+            <div class="w-12 h-1 bg-sea-blue mb-8"></div>
+            <h2 class="text-4xl md:text-5xl font-heading font-light text-slate-900 mb-8 leading-tight">
+              {t.title}
+            </h2>
+            <p class="text-lg md:text-xl text-stone-600 leading-relaxed font-light mb-12">
+              {t.desc}
+            </p>
+            
+            <div class="flex gap-12 border-t border-stone-200 pt-8">
+                <div>
+                    <div class="text-3xl font-heading font-light text-sea-blue mb-1">{t.stat1}</div>
+                    <div class="text-xs uppercase tracking-widest text-stone-400">{t.stat1Label}</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-heading font-light text-sea-blue mb-1">{t.stat2}</div>
+                    <div class="text-xs uppercase tracking-widest text-stone-400">{t.stat2Label}</div>
+                </div>
+            </div>
+        </ScrollReveal>
+      </div>
+
+      <div class="lg:col-span-7 order-1 lg:order-2">
+         <div class="relative pl-0 lg:pl-12">
+            <ImageSlider 
+               images={[
+                 "/images/mon-plaisir/gallery_04.webp", // Pool/Garden
+                 "/images/mon-plaisir/gallery_07.webp", // Terrace
+                 "/images/mon-plaisir/gallery_03.webp", // Room
+               ]} 
+               id="intro-slider"
+               height="h-[400px] md:h-[600px]"
+            />
+         </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+---
+const { class: className = "", color = "default" } = Astro.props;
+---
+  <a href="/" class={`group flex items-center gap-5 decoration-none ${className}`}>
+  <!-- Luxury Icon -->
+  <div class="relative">
+    <div class={`w-14 h-14 flex items-center justify-center border-[0.5px] rounded-full transition-all duration-500 group-hover:rotate-12 ${color === 'white' ? 'border-white/40' : 'border-[#C5A059]'}`}>
+        <span class={`font-heading font-light text-2xl tracking-[0.2em] transform translate-x-[1px] ${color === 'white' ? 'text-white' : 'text-stone-800'}`}>MP</span>
+    </div>
+    <!-- Decorative dots with gold -->
+    <div class={`absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${color === 'white' ? 'bg-white/40' : 'bg-[#C5A059]'}`}></div>
+    <div class={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full ${color === 'white' ? 'bg-white/40' : 'bg-[#C5A059]'}`}></div>
+  </div>
+
+  <div class="flex flex-col select-none">
+    <span class={`font-body text-[0.65rem] uppercase tracking-[0.4em] font-light leading-none mb-1.5 ${color === 'white' ? 'text-white/60' : 'text-stone-400'}`}>
+      Bed & Breakfast
+    </span>
+    <div class="relative">
+      <span class={`font-heading text-2xl md:text-3xl font-light tracking-wider leading-none ${color === 'white' ? 'text-white' : 'text-stone-900'}`}>
+        Mon <span class="italic text-[#C5A059]">Plaisir</span>
+      </span>
+      <div class={`absolute -bottom-2 left-0 w-0 group-hover:w-full h-[0.5px] transition-all duration-700 ${color === 'white' ? 'bg-[#C5A059]' : 'bg-[#C5A059]'}`}></div>
+    </div>
+  </div>
+</a>
